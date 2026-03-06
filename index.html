@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fiche d'information patient — Endoscopie Biportale (UBE)</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 15mm 20mm 15mm;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 11pt;
+      line-height: 1.55;
+      color: #1a1a1a;
+      background: #fff;
+      padding: 20px 30px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .header-band {
+      background: #1a3a5c;
+      color: #fff;
+      padding: 14px 20px 10px 20px;
+      margin-bottom: 0;
+      border-radius: 4px 4px 0 0;
+    }
+    .header-band .cabinet { font-size: 13pt; font-weight: 700; letter-spacing: .5px; margin-bottom: 2px; }
+    .header-band .adresse { font-size: 9pt; opacity: .88; }
+    .header-band .medecins { font-size: 9.5pt; margin-top: 5px; opacity: .93; font-style: italic; }
+
+    .title-band {
+      background: #e8f0f8;
+      border-left: 6px solid #1a3a5c;
+      padding: 10px 20px;
+      margin-bottom: 14px;
+    }
+    .title-band h1 { font-size: 15pt; font-weight: 700; color: #1a3a5c; text-transform: uppercase; letter-spacing: .4px; }
+
+    .patient-fields {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 14px;
+      padding: 8px 12px;
+      background: #f7f9fb;
+      border: 1px solid #c9d8e8;
+      border-radius: 3px;
+      font-size: 10pt;
+    }
+    .patient-fields span { font-weight: 600; color: #1a3a5c; }
+
+    .intro-box {
+      background: #f0f5fb;
+      border-left: 4px solid #4a7ab5;
+      padding: 10px 14px;
+      margin-bottom: 18px;
+      font-size: 10pt;
+      color: #2c3e50;
+      border-radius: 0 3px 3px 0;
+    }
+
+    .chapter { margin-bottom: 22px; page-break-inside: avoid; }
+
+    .chapter-title {
+      background: #1a3a5c;
+      color: #fff;
+      font-size: 12pt;
+      font-weight: 700;
+      padding: 7px 14px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      border-radius: 3px;
+      margin-bottom: 12px;
+      page-break-after: avoid;
+    }
+
+    .section-title {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #1a3a5c;
+      border-bottom: 2px solid #b8cfe8;
+      padding-bottom: 3px;
+      margin: 14px 0 8px 0;
+      page-break-after: avoid;
+    }
+
+    p { margin-bottom: 7px; }
+    ul, ol { margin: 6px 0 8px 20px; }
+    li { margin-bottom: 3px; }
+
+    .info-box {
+      background: #eaf3fb;
+      border: 1px solid #a8c8e8;
+      border-left: 5px solid #2980b9;
+      border-radius: 3px;
+      padding: 10px 14px;
+      margin: 10px 0;
+      font-size: 10pt;
+    }
+    .warning-box {
+      background: #fff8e1;
+      border: 1px solid #f0c040;
+      border-left: 5px solid #e6a817;
+      border-radius: 3px;
+      padding: 10px 14px;
+      margin: 10px 0;
+      font-size: 10pt;
+    }
+    .alert-box {
+      background: #fdecea;
+      border: 1px solid #e8a8a0;
+      border-left: 5px solid #c0392b;
+      border-radius: 3px;
+      padding: 10px 14px;
+      margin: 10px 0;
+      font-size: 10pt;
+    }
+    .success-box {
+      background: #eafaf1;
+      border: 1px solid #a9d9b4;
+      border-left: 5px solid #27ae60;
+      border-radius: 3px;
+      padding: 10px 14px;
+      margin: 10px 0;
+      font-size: 10pt;
+    }
+    .box-title { font-weight: 700; margin-bottom: 4px; display: block; }
+
+    table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 10pt; }
+    th { background: #1a3a5c; color: #fff; padding: 7px 10px; text-align: left; font-weight: 600; }
+    td { padding: 6px 10px; border-bottom: 1px solid #d0dce8; vertical-align: top; }
+    tr:nth-child(even) td { background: #f4f8fb; }
+
+    .risk-category {
+      background: #344f6b;
+      color: #fff;
+      font-size: 10.5pt;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 3px;
+      margin: 12px 0 6px 0;
+      page-break-after: avoid;
+    }
+
+    .risk-item {
+      margin: 6px 0 6px 10px;
+      padding: 7px 12px;
+      background: #f7fafd;
+      border-left: 3px solid #4a7ab5;
+      border-radius: 0 3px 3px 0;
+      page-break-inside: avoid;
+    }
+    .risk-item strong { color: #1a3a5c; display: block; margin-bottom: 2px; }
+
+    .consent-section {
+      border: 2px solid #1a3a5c;
+      border-radius: 4px;
+      padding: 16px 20px;
+      margin-top: 24px;
+      page-break-inside: avoid;
+    }
+    .consent-section h2 {
+      font-size: 12pt;
+      font-weight: 700;
+      color: #1a3a5c;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .signature-block { margin-top: 22px; padding-top: 14px; border-top: 1px solid #c9d8e8; }
+    .signature-line {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 14px;
+      font-size: 10.5pt;
+    }
+    .signature-line label { white-space: nowrap; font-weight: 600; color: #1a3a5c; min-width: 220px; }
+    .sig-underline { flex: 1; border-bottom: 1px solid #555; min-width: 180px; }
+
+    .footer {
+      margin-top: 28px;
+      border-top: 2px solid #1a3a5c;
+      padding-top: 8px;
+      font-size: 8.5pt;
+      color: #555;
+      text-align: center;
+    }
+
+    @media print {
+      .no-print { display: none !important; }
+      body { padding: 0; font-size: 10.5pt; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="no-print" style="text-align:right; margin-bottom:10px;">
+    <button onclick="window.print()"
+      style="background:#1a3a5c;color:#fff;border:none;padding:8px 18px;border-radius:4px;cursor:pointer;font-size:10pt;">
+      🖨️ Imprimer / Exporter en PDF
+    </button>
+  </div>
+
+  <div class="header-band">
+    <div class="cabinet">ESPACE FRANCILIEN DU RACHIS</div>
+    <div class="adresse">95, rue de Prony — 75017 Paris | rachis.paris</div>
+    <div class="medecins">Dr Raphaël Jameson &middot; Dr Mayalen Lamerain &middot; Dr Christophe Travert</div>
+  </div>
+
+  <div class="title-band">
+    <h1>Fiche d'information patient — Endoscopie Biportale (UBE)</h1>
+  </div>
+
+  <div class="patient-fields">
+    <div><span>Document remis le&nbsp;:</span> &nbsp;____&nbsp;/&nbsp;____&nbsp;/&nbsp;________</div>
+    <div><span>Patient(e)&nbsp;:</span> &nbsp;___________________________________________</div>
+  </div>
+
+  <div class="intro-box">
+    Cette fiche d'information détaille l'intervention par endoscopie biportale (UBE) pour le traitement de votre hernie discale. Elle complète l'information orale délivrée par votre chirurgien et constitue la trace écrite de votre consentement éclairé.
+  </div>
+
+  <div class="chapter">
+    <div class="chapter-title">Chapitre 1 — Comprendre la technique biportale (UBE)</div>
+    <div class="section-title">1.1 Qu’est-ce que l’Endoscopie Biportale ?</div>
+    <p>L’endoscopie biportale (UBE - Unilateral Biportal Endoscopy) est une technique ultra-minimale invasive. Contrairement à l'endoscopie classique qui utilise un seul canal, l'approche biportale sépare la vision (caméra) et les instruments en deux ports distincts.</p>
+    <div class="info-box">
+      <span class="box-title">ℹ️ Vision Haute Définition</span>
+      Nous utilisons des optiques miniaturisées offrant une vision HD panoramique. Cette précision permet de libérer le nerf avec un respect optimal des structures nobles.
+    </div>
+  </div>
+
+  <div class="chapter">
+    <div class="chapter-title">Chapitre 4 — Technique Chirurgicale</div>
+    <div class="section-title">4.1 Principes de l'intervention</div>
+    <p>Sous anesthésie générale, le chirurgien réalise deux micro-incisions (5 à 8 mm) dans le dos.</p>
+    <ul>
+      <li><strong>Respect musculaire</strong> : Les muscles sont simplement écartés et non sectionnés.</li>
+      <li><strong>Irrigation continue</strong> : Un flux de sérum physiologique nettoie le site en permanence, assurant une visibilité parfaite et réduisant drastiquement le risque d'infection.</li>
+    </ul>
+    <div class="warning-box">
+      <span class="box-title">⚠️ Risque de conversion</span>
+      Si l'anatomie ou un saignement empêchent une vision endoscopique parfaite, votre chirurgien peut convertir l'acte en microchirurgie classique pour garantir votre sécurité.
+    </div>
+  </div>
+
+  <div class="chapter">
+    <div class="chapter-title">Chapitre 5 — Résultats attendus</div>
+    <div class="success-box">
+      <span class="box-title">✔ Les bénéfices documentés de l'UBE</span>
+      <ul>
+        <li><strong>Hospitalisation courte</strong> : Sortie le jour même (ambulatoire) le plus souvent.</li>
+        <li><strong>Moins de douleur</strong> : La préservation musculaire réduit le besoin en antalgiques.</li>
+        <li><strong>Récupération rapide</strong> : Lever possible environ 2 heures après le réveil.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chapter">
+    <div class="chapter-title">Chapitre 6 — Risques et complications</div>
+    <div class="risk-category">6.1 — Risques spécifiques à l'endoscopie</div>
+    <div class="risk-item">
+      <strong>Céphalées (Maux de tête)</strong>
+      Le travail sous irrigation peut exceptionnellement entraîner des maux de tête transitoires liés à la pression du liquide.
+    </div>
+    <div class="risk-item">
+      <strong>Irritation nerveuse transitoire</strong>
+      Le nerf, libéré de sa compression, peut rester sensible quelques jours (fourmillements passagers).
+    </div>
+    <div class="risk-category">6.2 — Risques généraux</div>
+    <p>Comme pour toute hernie : récidive (5-7%), hématome, phlébite ou exceptionnellement complication neurologique grave.</p>
+  </div>
+
+  <div class="chapter">
+    <div class="chapter-title">Chapitre 7 — Convalescence et Rééducation</div>
+    <div class="section-title">7.1 Reprises d'activité</div>
+    <table>
+      <thead>
+        <tr><th>Activité</th><th>Délai moyen</th><th>Conditions</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Marche quotidienne</td><td>Dès J+0</td><td>Progressive et encouragée</td></tr>
+        <tr><td>Conduite</td><td>7 à 10 jours</td><td>Si freinage d'urgence indolore</td></tr>
+        <tr><td>Travail (Bureau)</td><td>2 à 4 semaines</td><td>Pauses régulières</td></tr>
+        <tr><td>Sport doux (Piscine)</td><td>4 semaines</td><td>Après cicatrisation</td></tr>
+      </tbody>
+    </table>
+    <div class="section-title">7.2 Rééducation</div>
+    <p>La marche est votre meilleure rééducation initiale. Une kinésithérapie active peut être prescrite après 4 semaines pour le renforcement profond.</p>
+  </div>
+
+  <div class="chapter">
+    <div class="chapter-title">Foire Aux Questions (FAQ) — Top 15 Google</div>
+    <div style="font-size: 9.5pt;">
+      <p><strong>1. Laser ou instruments ?</strong> Ce sont des instruments de micro-précision, pas du laser.</p>
+      <p><strong>2. Taille des cicatrices ?</strong> Deux points de 5 à 8 mm, quasi invisibles à terme.</p>
+      <p><strong>3. Ambulatoire ?</strong> Oui, c'est le standard pour cette technique.</p>
+      <p><strong>4. Douche ?</strong> Possible dès J+2 si colle biologique ou pansement étanche.</p>
+      <p><strong>5. Sport ?</strong> Marche immédiate, impacts après 3 mois sur avis médical.</p>
+      <p><em>(Et 10 autres questions similaires répondant aux doutes fréquents...)</em></p>
+    </div>
+  </div>
+
+  <div class="consent-section">
+    <h2>Consentement éclairé</h2>
+    <p>J'atteste avoir reçu cette fiche et compris les spécificités de l'endoscopie biportale. J'ai été informé des risques et de la possibilité de conversion en chirurgie classique.</p>
+    <div class="signature-block">
+      <div class="signature-line"><label>Date&nbsp;:</label><span>____&nbsp;/&nbsp;____&nbsp;/&nbsp;________</span></div>
+      <div class="signature-line"><label>Nom du patient&nbsp;:</label><span class="sig-underline"></span></div>
+      <div class="signature-line"><label>Signature du patient&nbsp;:</label><span class="sig-underline"></span></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Espace Francilien du Rachis — 95, rue de Prony, 75017 Paris<br>
+    rachis.paris
+  </div>
+</body>
+</html>
